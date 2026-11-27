@@ -23,7 +23,7 @@ export default function Header({ theme, onCycleTheme, onSettings }: Props) {
         <p className="mt-1 flex items-center gap-1.5 whitespace-nowrap text-[0.8rem] font-semibold text-muted sm:text-sm">
           made with
           <HeartIcon width={13} height={13} className="anim-heart text-accent" />
-          for <span className="font-display text-[0.95rem] italic text-accent">Sussmita</span>
+          for <span lang="ne" className="font-name text-[1.05rem] leading-none text-accent sm:text-[1.15rem]">सुस्मिता</span>
         </p>
       </div>
       <div className="flex items-center gap-1">

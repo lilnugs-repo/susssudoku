@@ -1,6 +1,6 @@
-# Sussmita's Sudoku ♥
+# Sudoku for सुस्मिता ♥
 
-A cozy, mobile-first Sudoku web app, made with love for **Sussmita**.
+A cozy, mobile-first Sudoku web app, made with love for **सुस्मिता** (Sussmita).
 Built with Next.js (App Router), TypeScript and Tailwind CSS, ready to deploy on Vercel.
 
 ## Features

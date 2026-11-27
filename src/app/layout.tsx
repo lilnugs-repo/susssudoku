@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Nunito } from "next/font/google";
+import { Fraunces, Nunito, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
 
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito", display: "swap" });
@@ -9,11 +9,18 @@ const fraunces = Fraunces({
   display: "swap",
   style: ["normal", "italic"],
 });
+/** Devanagari serif for the name सुस्मिता (Nunito/Fraunces have no Devanagari glyphs). */
+const tiro = Tiro_Devanagari_Hindi({
+  subsets: ["devanagari"],
+  weight: "400",
+  variable: "--font-tiro",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Sussmita's Sudoku",
-  description: "A cozy, mobile-first Sudoku — made with love for Sussmita.",
-  applicationName: "Sussmita's Sudoku",
+  title: "Sudoku for सुस्मिता",
+  description: "A cozy, mobile-first Sudoku — made with love for सुस्मिता.",
+  applicationName: "Sudoku for सुस्मिता",
   appleWebApp: { capable: true, title: "Sudoku", statusBarStyle: "default" },
   formatDetection: { telephone: false },
 };
@@ -35,7 +42,7 @@ const themeScript = `try{var s=JSON.parse(localStorage.getItem("susssudoku:setti
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="light" className={`${nunito.variable} ${fraunces.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="light" className={`${nunito.variable} ${fraunces.variable} ${tiro.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

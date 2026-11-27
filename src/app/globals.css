@@ -90,8 +90,9 @@
   --color-accent-ink: var(--accent-ink);
   --color-user: var(--user);
   --color-conflict: var(--conflict);
-  --font-sans: var(--font-nunito), ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-nunito), var(--font-tiro), ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-fraunces), var(--font-tiro), ui-serif, Georgia, serif;
+  --font-name: var(--font-tiro), var(--font-fraunces), "Noto Serif Devanagari", serif;
 }
 
 /* ---------- Base ---------- */

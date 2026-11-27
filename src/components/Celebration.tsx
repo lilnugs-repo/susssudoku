@@ -11,7 +11,7 @@ const NOTES = [
   "Every square in its place — just like you make everything fall into place.",
   "Solved with grace. This little puzzle box was made just for you.",
   "Sharp mind, warm heart. Another one beautifully done.",
-  "Nine rows, nine columns, and one brilliant Sussmita.",
+  "Nine rows, nine columns, and one brilliant सुस्मिता.",
   "That was lovely to watch. Ready for another?",
 ];
 
@@ -46,7 +46,7 @@ export default function Celebration({ difficulty, elapsed, mistakes, hintsUsed, 
             <HeartIcon className="anim-heart mx-auto text-accent" width={44} height={44} />
             <p className="mt-3 text-sm font-bold uppercase tracking-[0.2em] text-muted">Puzzle solved</p>
             <h2 id="win-title" className="font-display mt-1 text-3xl font-semibold italic leading-tight">
-              Well done, Sussmita!
+              Well done, <span lang="ne" className="font-name not-italic">सुस्मिता</span>!
             </h2>
             <p className="mx-auto mt-3 max-w-[18rem] text-[0.95rem] text-muted">{NOTES[noteIndex % NOTES.length]}</p>
 
