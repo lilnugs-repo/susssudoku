@@ -28,6 +28,8 @@ export interface Flash {
   units: number[];
   /** The placed digit does not match the solution. */
   wrong: boolean;
+  /** Placed by the Hint button rather than by the player. */
+  byHint: boolean;
 }
 
 export interface GameState {
@@ -137,6 +139,7 @@ function placeValue(s: GameState, cell: number, digit: number, viaHint = false):
       cell,
       units: correct ? completedUnitsAt(values, s.solution, cell) : [],
       wrong: !correct,
+      byHint: viaHint,
     },
   };
 }

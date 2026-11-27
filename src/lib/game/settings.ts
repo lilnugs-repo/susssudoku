@@ -1,7 +1,7 @@
 import type { Difficulty } from "../sudoku/index.ts";
 
 export type Theme = "light" | "dark" | "cozy";
-export const THEMES: readonly Theme[] = ["light", "cozy", "dark"];
+export const THEMES: readonly Theme[] = ["dark", "light", "cozy"];
 
 export interface Settings {
   theme: Theme;
@@ -13,15 +13,21 @@ export interface Settings {
   highlightUnits: boolean;
   showTimer: boolean;
   lastDifficulty: Difficulty;
+  /** Bumped when the default theme changes, so old saved defaults get the new one once. */
+  themeVersion?: number;
 }
 
+/** v2: dark became the default theme. */
+export const THEME_VERSION = 2;
+
 export const DEFAULT_SETTINGS: Settings = {
-  theme: "light",
+  theme: "dark",
   checkMistakes: true,
   highlightMatches: true,
   highlightUnits: true,
   showTimer: true,
   lastDifficulty: "easy",
+  themeVersion: THEME_VERSION,
 };
 
 export interface LevelStats {

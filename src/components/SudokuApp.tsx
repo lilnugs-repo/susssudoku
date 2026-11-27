@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSudokuGame } from "@/hooks/useSudokuGame";
+import { createPraiser } from "@/lib/game/praise";
 import { THEMES } from "@/lib/game/settings";
 import type { Difficulty } from "@/lib/sudoku";
 import Board from "./Board";
 import Celebration from "./Celebration";
+import type { Cheer } from "./Fireflies";
 import Header from "./Header";
 import { PlayIcon } from "./Icons";
 import Keypad from "./Keypad";
@@ -37,6 +39,21 @@ export default function SudokuApp() {
     }
   }, [ready, game.id, game.completed]);
   const showWin = winFor === game.id && game.completed;
+
+  // ---- Firefly + praise for each correct digit she places herself.
+  // Only while "Check mistakes" is on, so turning it off keeps right/wrong hidden.
+  const praise = useRef<(() => string) | null>(null);
+  const [cheer, setCheer] = useState<Cheer | null>(null);
+  const lastCheered = useRef<number | null>(null);
+  const flash = game.flash;
+  useEffect(() => {
+    if (!flash || flash.wrong || flash.byHint || !settings.checkMistakes) return;
+    if (lastCheered.current === flash.key) return;
+    lastCheered.current = flash.key;
+    praise.current ??= createPraiser();
+    // On the winning move the celebration screen does the talking.
+    setCheer({ key: flash.key, cell: flash.cell, text: game.completed ? null : praise.current() });
+  }, [flash, game.completed, settings.checkMistakes]);
 
   // ---- Toast auto-dismiss.
   useEffect(() => {
@@ -152,7 +169,7 @@ export default function SudokuApp() {
             onDifficulty={() => setSheet("new")}
             onTogglePause={togglePause}
           />
-          <Board game={game} settings={settings} ready={ready} onTap={onTap}>
+          <Board game={game} settings={settings} ready={ready} onTap={onTap} cheer={game.paused ? null : cheer}>
             {game.paused && (
               <button
                 type="button"

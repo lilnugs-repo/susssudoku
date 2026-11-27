@@ -9,7 +9,7 @@ interface Props {
   onSettings: () => void;
 }
 
-const NEXT_LABEL: Record<Theme, string> = { light: "Switch to cozy theme", cozy: "Switch to dark theme", dark: "Switch to light theme" };
+const NEXT_LABEL: Record<Theme, string> = { dark: "Switch to light theme", light: "Switch to cozy theme", cozy: "Switch to dark theme" };
 
 export default function Header({ theme, onCycleTheme, onSettings }: Props) {
   const iconBtn =

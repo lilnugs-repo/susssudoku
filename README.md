@@ -15,7 +15,8 @@ Built with Next.js (App Router), TypeScript and Tailwind CSS, ready to deploy on
 - **Game tools.** Undo, Erase, Hint, New game and Restart.
   - A hint first fixes a wrong digit. Otherwise it fills the next logical single and explains why.
 - **Mistake checking you can turn off.** A pausable timer that pauses itself when the app goes to the background.
-- **Three themes.** Light, Cozy and Dark. Small animations, a celebration screen when you win, and best times saved per level.
+- **A junkiri (firefly) for every right answer.** Each correct number she places sends a glowing firefly across the board. A praise bubble also appears, such as "Well done, Junkiri!", using a different phrase each time. Nicknames are shuffled so all seven appear before any repeats (see `src/lib/game/praise.ts`). Hints don't earn praise, and both effects turn off when "Check mistakes" is off.
+- **Three themes.** Dark (default), Light and Cozy. Small animations, a celebration screen when you win, and best times saved per level.
 - **Your game is saved** in `localStorage`, including the board, notes, timer, difficulty and undo history.
 
 ### Keyboard

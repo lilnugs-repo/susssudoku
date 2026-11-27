@@ -31,18 +31,15 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f5fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1117" },
-  ],
+  themeColor: "#0e1117",
 };
 
 /** Applies the saved theme before first paint to avoid a flash. */
-const themeScript = `try{var s=JSON.parse(localStorage.getItem("susssudoku:settings:v1")||"{}");var t=s.theme;if(t!=="light"&&t!=="dark"&&t!=="cozy"){t="light"}document.documentElement.dataset.theme=t}catch(e){}`;
+const themeScript = `try{var s=JSON.parse(localStorage.getItem("susssudoku:settings:v1")||"{}");var t=s.theme;if(s.themeVersion!==2||(t!=="light"&&t!=="dark"&&t!=="cozy")){t="dark"}document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="light" className={`${nunito.variable} ${fraunces.variable} ${tiro.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="dark" className={`${nunito.variable} ${fraunces.variable} ${tiro.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

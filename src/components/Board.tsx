@@ -5,16 +5,18 @@ import type { GameState } from "@/lib/game/state";
 import type { Settings } from "@/lib/game/settings";
 import { CELL_UNITS, UNITS, findConflicts } from "@/lib/sudoku";
 import Cell from "./Cell";
+import Fireflies, { type Cheer } from "./Fireflies";
 
 interface BoardProps {
   game: GameState;
   settings: Settings;
   ready: boolean;
   onTap: (cell: number) => void;
+  cheer: Cheer | null;
   children?: React.ReactNode;
 }
 
-export default function Board({ game, settings, ready, onTap, children }: BoardProps) {
+export default function Board({ game, settings, ready, onTap, cheer, children }: BoardProps) {
   const { values, puzzle, notes, selected, solution, flash, completed, lockedDigit, paused } = game;
 
   const conflicts = useMemo(() => findConflicts(values), [values]);
@@ -38,7 +40,7 @@ export default function Board({ game, settings, ready, onTap, children }: BoardP
   }, [flash]);
 
   return (
-    <div className="board-size relative mx-auto">
+    <div className="board-size relative mx-auto [container-type:inline-size]">
       <div
         role="grid"
         aria-label="Sudoku board"
@@ -75,6 +77,7 @@ export default function Board({ game, settings, ready, onTap, children }: BoardP
           );
         })}
       </div>
+      <Fireflies cheer={cheer} />
       {children}
     </div>
   );

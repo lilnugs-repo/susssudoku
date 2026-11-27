@@ -5,6 +5,7 @@ import {
   DEFAULT_SETTINGS,
   EMPTY_STATS,
   THEMES,
+  THEME_VERSION,
   type Settings,
   type Stats,
 } from "@/lib/game/settings";
@@ -24,7 +25,11 @@ const BLANK: GameState = createGame({
 function loadSettings(): Settings {
   const saved = readJSON<Partial<Settings>>(STORAGE_KEYS.settings) ?? {};
   const merged = { ...DEFAULT_SETTINGS, ...saved };
-  if (!THEMES.includes(merged.theme)) merged.theme = DEFAULT_SETTINGS.theme;
+  // Settings saved before dark became the default move to dark once.
+  if (saved.themeVersion !== THEME_VERSION || !THEMES.includes(merged.theme)) {
+    merged.theme = DEFAULT_SETTINGS.theme;
+    merged.themeVersion = THEME_VERSION;
+  }
   return merged;
 }
 

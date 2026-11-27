@@ -229,6 +229,79 @@ button {
 }
 .anim-win { animation: win-wave 0.6s ease both; animation-delay: var(--delay, 0ms); }
 
+/* ---------- Firefly ---------- */
+.firefly,
+.firefly-trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.firefly {
+  background: radial-gradient(circle, #fffbe6 0 28%, #f4ff8a 45%, rgb(200 255 90 / 0.9) 60%, transparent 72%);
+  box-shadow:
+    0 0 10px 4px rgb(225 255 120 / 0.85),
+    0 0 28px 12px rgb(190 255 90 / 0.35);
+}
+.firefly::after {
+  /* Gentle blink layered over the flight. */
+  content: "";
+  position: absolute;
+  inset: -0.6rem;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgb(235 255 140 / 0.55), transparent 65%);
+  animation: firefly-blink 0.55s ease-in-out infinite alternate;
+}
+
+.firefly-trail {
+  background: radial-gradient(circle, #f6ffb0 0 35%, rgb(210 255 110 / 0.6) 55%, transparent 72%);
+  box-shadow: 0 0 8px 3px rgb(215 255 110 / 0.45);
+}
+
+@keyframes firefly-blink {
+  from { opacity: 0.25; transform: scale(0.75); }
+  to { opacity: 1; transform: scale(1.15); }
+}
+
+/* ---------- Praise bubble ---------- */
+.praise {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  white-space: nowrap;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: max(0.8rem, 3.4cqw);
+  color: #1b2209;
+  background: linear-gradient(135deg, #f6ffa8, #c8f56a);
+  box-shadow: 0 0 18px rgb(210 255 110 / 0.55), 0 6px 18px rgb(0 0 0 / 0.25);
+  animation: praise-float 1.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.praise-below {
+  transform: translate(-50%, 0);
+  animation-name: praise-float-below;
+}
+
+@keyframes praise-float {
+  0% { opacity: 0; transform: translate(-50%, -60%) scale(0.7); }
+  14% { opacity: 1; transform: translate(-50%, -115%) scale(1.04); }
+  22% { transform: translate(-50%, -110%) scale(1); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -190%) scale(0.98); }
+}
+@keyframes praise-float-below {
+  0% { opacity: 0; transform: translate(-50%, -40%) scale(0.7); }
+  14% { opacity: 1; transform: translate(-50%, 12%) scale(1.04); }
+  22% { transform: translate(-50%, 8%) scale(1); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 70%) scale(0.98); }
+}
+
 /* ---------- Sheets & toasts ---------- */
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes rise-in {
@@ -252,4 +325,14 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  /* Keep the praise readable, but just fade it in place. */
+  .praise,
+  .praise-below {
+    animation: praise-fade 1.7s ease both !important;
+  }
+}
+
+@keyframes praise-fade {
+  0%, 100% { opacity: 0; }
+  12%, 75% { opacity: 1; }
 }
