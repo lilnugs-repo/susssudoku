@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+/* ---------- Theme tokens ---------- */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f5fa;
+  --bg-glow: #ffe4ee;
+  --surface: #ffffff;
+  --surface-2: #eef0f7;
+  --ink: #161b2e;
+  --muted: #646b82;
+  --line: #d5d9e6;
+  --line-strong: #2b3149;
+  --accent: #d6336c;
+  --accent-soft: #fde4ee;
+  --accent-ink: #ffffff;
+  --given: #161b2e;
+  --user: #3451d1;
+  --note: #59607a;
+  --cell-sel: #c9d6ff;
+  --cell-unit: #e9edf8;
+  --cell-match: #dbe3ff;
+  --cell-flash: #ffe0ec;
+  --conflict: #d92d20;
+  --conflict-bg: #fde3e1;
+  --shadow: 0 1px 2px rgb(22 27 46 / 0.06), 0 8px 24px rgb(22 27 46 / 0.08);
+}
+
+[data-theme="cozy"] {
+  color-scheme: light;
+  --bg: #f6eee2;
+  --bg-glow: #f9d9c8;
+  --surface: #fffaf3;
+  --surface-2: #f0e5d5;
+  --ink: #3a2c25;
+  --muted: #86705f;
+  --line: #e1d2bd;
+  --line-strong: #5a4336;
+  --accent: #c4466f;
+  --accent-soft: #f8dde3;
+  --accent-ink: #fffaf3;
+  --given: #3a2c25;
+  --user: #b4532a;
+  --note: #806a5a;
+  --cell-sel: #f6cfa9;
+  --cell-unit: #f4e8d6;
+  --cell-match: #f9dcc1;
+  --cell-flash: #fbd5dc;
+  --conflict: #c0262d;
+  --conflict-bg: #f9d6d2;
+  --shadow: 0 1px 2px rgb(58 44 37 / 0.06), 0 8px 24px rgb(58 44 37 / 0.1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e1117;
+  --bg-glow: #2a1422;
+  --surface: #171b25;
+  --surface-2: #222838;
+  --ink: #eef0f7;
+  --muted: #9aa1b8;
+  --line: #2d3446;
+  --line-strong: #8a93ad;
+  --accent: #ff6b9a;
+  --accent-soft: #3a1d2a;
+  --accent-ink: #1a0d13;
+  --given: #eef0f7;
+  --user: #8fa8ff;
+  --note: #a7aec4;
+  --cell-sel: #34437a;
+  --cell-unit: #1f2535;
+  --cell-match: #2b3762;
+  --cell-flash: #4a2236;
+  --conflict: #ff7a70;
+  --conflict-bg: #4a1f1d;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-user: var(--user);
+  --color-conflict: var(--conflict);
+  --font-sans: var(--font-nunito), ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+/* ---------- Base ---------- */
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  background-image: radial-gradient(60rem 30rem at 50% -10rem, var(--bg-glow), transparent 70%);
+  background-repeat: no-repeat;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ---------- Layout sizing ---------- */
+/* Phones: header, board and controls share one column the width of the board,
+   which fits the screen width and leaves room for the controls vertically. */
+.board-size,
+.panel-size,
+.header-size {
+  width: max(16.5rem, min(100%, 34rem, calc(100svh - 20rem)));
+}
+
+/* Short phones (e.g. iPhone SE): tighten the controls. */
+@media (max-height: 700px) {
+  .kp-btn { height: 3.15rem; }
+  .tool-btn { min-height: 3rem; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+}
+
+/* Desktop / landscape tablets: board left, controls in a side panel. */
+@media (min-width: 1024px) and (min-height: 560px) {
+  .board-size { width: min(100%, 40rem, calc(100svh - 9.5rem)); }
+  .panel-size { width: 20rem; }
+  .header-size { width: 100%; }
+  .kp-btn { height: 4.5rem; }
+}
+
+/* ---------- Board ---------- */
+.board {
+  container-type: inline-size;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  font-size: 6.3cqw;
+  line-height: 1;
+  transition: background-color 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.notes {
+  position: absolute;
+  inset: 6%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  font-size: 2.45cqw;
+  font-weight: 700;
+  color: var(--note);
+}
+
+.notes > span {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.notes > span.note-match {
+  background: var(--user);
+  color: var(--surface);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.anim-pop { animation: pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6%); }
+  40%, 80% { transform: translateX(6%); }
+}
+.anim-shake { animation: shake 0.32s ease; }
+
+@keyframes sweep {
+  0% { background-color: var(--cell-flash); }
+  100% { background-color: transparent; }
+}
+.anim-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: sweep 0.7s ease-out both;
+  animation-delay: var(--delay, 0ms);
+  background-color: transparent;
+}
+
+@keyframes win-wave {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); color: var(--accent); }
+  100% { transform: scale(1); }
+}
+.anim-win { animation: win-wave 0.6s ease both; animation-delay: var(--delay, 0ms); }
+
+/* ---------- Sheets & toasts ---------- */
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.anim-fade { animation: fade-in 0.2s ease both; }
+.anim-rise { animation: rise-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.2); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+}
+.anim-heart { display: inline-block; animation: heartbeat 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

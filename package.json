@@ -1,0 +1,30 @@
+{
+  "name": "susssudoku",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A cozy, mobile-first Sudoku made for Sussmita.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:engine": "node --experimental-strip-types --no-warnings scripts/verify-engine.ts"
+  },
+  "dependencies": {
+    "next": "^15.5.29",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^26.6.11",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.29",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
+  }
+}
